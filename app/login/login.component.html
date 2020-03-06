@@ -1,0 +1,50 @@
+
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Candidate Login</mat-card-title> <br><br>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-error *ngIf="LoginErrAll!=''" class="red">{{LoginErrAll}}</mat-error><br><br>
+      <form class="example-form" [formGroup]="loginForm" novalidate (ngSubmit)="loginAction()">
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Mobile Number / Email Id"  formControlName="username" (change)="checkLoginUserId(this.loginForm.value)" (keyup)="checkLoginUserId(this.loginForm.value)">
+              </mat-form-field> 
+              <input type="hidden" [(ngModel)]="flag" formControlName="flag">
+              <mat-error class="red" *ngIf="LoginErrUser!=''"> {{LoginErrUser}} </mat-error>
+            </td>
+          </tr>
+        </table>
+      
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password"  type="password" formControlName="password">
+                <mat-error *ngIf="this.loginForm?.controls?.password?.hasError('required')">This Field is required. </mat-error>
+                <mat-error *ngIf="this.loginForm?.controls?.password?.hasError('minlength')"> At least 8 character required. </mat-error>
+                <mat-error *ngIf="this.loginForm?.controls?.password?.hasError('pattern')">Password should contain one number, one capital letter and one special character</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <div class="example-button-row">
+               <button mat-raised-button color="primary" type="submit" [disabled]="this.loginForm.invalid"> {{btnName}}
+               </button>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+</mat-card>
+  
+  
+  
